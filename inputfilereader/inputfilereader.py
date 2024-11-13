@@ -1,5 +1,5 @@
 import mbsObject
-
+import json
 
 f = open("inputfilereader/test.fdd","r")
 
@@ -17,7 +17,7 @@ for line in fileContent:
     if(line.find("$") >= 0):            #new block found
         if(currentBlockType != ""):
             if(currentBlockType == "RIGID_BODY"):
-                listOfMbsObjects.append(mbsObject.mbsObkect("body",currentTextBlock))
+                listOfMbsObjects.append(mbsObject.rigidBody(currentTextBlock))       # -*-*-*-*-*-*-*
             currentBlockType = ""
             
     for type_i in searchForObjects:
@@ -26,9 +26,27 @@ for line in fileContent:
             currentTextBlock.clear()
             break
     currentTextBlock.append(line)
-print(len(listOfMbsObjects))            
 
-print("Linda")
+modelObjects = []
+for object in listOfMbsObjects:
+    modelObjects.append(object.parameter)
+jDataBase = json.dumps({"modelObjects": modelObjects})
+with open("inputfilereader/test.json", "w") as outfile:
+    outfile.write(jDataBase)
+
+
+f = open("inputfilereader/test.json", "r")
+data = json.load(f)
+f.close()
+
+fds = open("inputfilereader/test.fds","w")
+for mbsObject_i in listOfMbsObjects:
+    mbsObject_i.writeInputFile(fds)
+fds.close()
+
+
+print(len(listOfMbsObjects))            
+print("Nußbaumer Linda")
 
 
 

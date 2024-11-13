@@ -1,0 +1,10 @@
+Body Rigid_EulerParameter
+	mass = 0.001
+	COG = 0.0 , 0.0 , 0.0
+EndBody
+%
+Body Rigid_EulerParameter
+	mass = 0.001
+	COG = 0.0 , 0.0 , 0.0
+EndBody
+%
