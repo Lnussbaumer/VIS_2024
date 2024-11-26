@@ -1,6 +1,6 @@
 # Aufgabe 2
 # 1. Verwenden Sie die Klassen aus /VIS_2024/inputfilereader (mbsObject)
-#        Importieren Sie die Klasse mbsObject, die Sie in Aufgabe 2 erstellt haben.
+#       Importieren Sie die Klasse mbsObject, die Sie in Aufgabe 2 erstellt haben.
 
 import sys
 import os
