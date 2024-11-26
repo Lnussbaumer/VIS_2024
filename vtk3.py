@@ -1,5 +1,4 @@
-
-import vtkmodules.all as vtk
+import vtk
 
 # Create a cone source
 cone = vtk.vtkConeSource()
