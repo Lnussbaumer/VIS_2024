@@ -1,5 +1,9 @@
 $RIGID_BODY:
 name: new_body_0
+<<<<<<< HEAD
+=======
+
+>>>>>>> 24f025edd1f69e7f07d621cf80992fe035a48a34
 geometry: C:\FH\VIS\VIS_2024\Aufgabe_2\quader.obj
 position: 0.000000, 0.000000, 0.000000
 x_axis: 1.00000000, 0.00000000, 0.00000000
@@ -24,7 +28,7 @@ position: 25.000000, 0.000000, 10.000000
 x_axis: 1.00000000, 0.00000000, 0.00000000
 y_axis: 0.00000000, 1.00000000, 0.00000000
 z_axis:0.00000000, 0.00000000, 1.00000000
-color: 170 230 228   255
+color: 254 146 146   255
 transparency: 0
 initial velocity: 0.000000, 0.000000, 0.000000
 initial omega: 0.000000, 0.000000, 0.000000
@@ -137,7 +141,7 @@ MaxNumOfTimeStepsUsingSameFactorizedJacobian: 0
 UsePardisoScalingAndMatching: 0
 
 $SETTINGS:
-background color: 255 255 255   255
+background color: 200 100 0
 bounding mode: 0
 COG marker scale: 0.010000
 constraint icon scale: 0.010000

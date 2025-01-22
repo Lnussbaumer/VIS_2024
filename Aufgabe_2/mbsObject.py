@@ -1,6 +1,7 @@
 
 import os
 import sys
+# quader.obj
 
 class mbsObject:
     def __init__(self,type,subtype,**kwargs):

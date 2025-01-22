@@ -1,12 +1,12 @@
 
-import sys
+import sys #Python-Interpreter und Argumente
 from pathlib import Path
-from PyQt6.QtWidgets import (
+from PyQt6.QtWidgets import ( #Importiert Klassen für die Erstellung der GUI
     QApplication, QMainWindow, QMenuBar, QStatusBar, QFileDialog, QVBoxLayout, QWidget, QColorDialog, QInputDialog #********** 
 )
 from PyQt6.QtCore import Qt
 
-from vtkmodules.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor
+from vtkmodules.qt.QVTKRenderWindowInteractor import QVTKRenderWindowInteractor # grafische datein in 3D anzeigen
 from vtkmodules.vtkRenderingCore import vtkRenderer, vtkActor #**********
 import mbsModel
 
@@ -18,29 +18,29 @@ from vtkmodules.vtkFiltersGeneral import vtkTransformPolyDataFilter
 #--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*--*
 
 
-class MainWindow(QMainWindow):
-    def __init__(self):
+class MainWindow(QMainWindow): # Hauptfensterklasse der Anwendung ..... Zeile 232
+    def __init__(self): #Konstruktor der Klasse MainWindow = Funktion die automatisch aufgerufen wird
         super().__init__()
-# isinstance 
+#  
         # Fenster-Einstellungen
-        self.setWindowTitle("pyFreeDyn - Qt Anwendung")
+        self.setWindowTitle("pyFreeDyn - Qt Anwendung")             # Ruft Funktionen auf: 
         self.setGeometry(100, 100, 1024, 768)
 
         # Menüleiste erstellen
-        self.create_menu()
+        self.create_menu()                                           # Funktion unten
 
         # Transformationsobjekt erstellen
         self.transform = vtkTransform()  
-        self.transform_filter = vtkTransformPolyDataFilter()  
+        self.transform_filter = vtkTransformPolyDataFilter()  # Klasse aus der VTK-Bibliothek, die verwendet wird, um geometrische Transformationen (Translation, Rotation, Skalierung) anzuwenden
 
         # Statusleiste erstellen
         self.statusBar = QStatusBar()
         self.setStatusBar(self.statusBar)
         self.statusBar.showMessage("Bereit")
 
-        # Zentrales Widget (VTK Render Window)
-        self.central_widget = QWidget()
-        self.setCentralWidget(self.central_widget)
+        # Zentrales Widget (VTK Render Window)                   erstellt ein neues Widget-Objekt, das als zentrales Widget des Hauptfensters fungieren wird. 
+        self.central_widget = QWidget()                        # Ein Widget ist ein grundlegendes Baustein-Element in einer GUI, das verschiedene grafische 
+        self.setCentralWidget(self.central_widget)             # Elemente wie Schaltflächen, Textfelder und Layouts enthalten kann. 
 
         # Layout für zentrales Widget
         layout = QVBoxLayout(self.central_widget)
@@ -57,7 +57,7 @@ class MainWindow(QMainWindow):
         # Platzhalter für das geladene Modell
         self.model = None
 
-    def create_menu(self):
+    def create_menu(self): #Die Funktion wird im Konstruktor der Klasse MainWindow aufgerufen.
         """Erstellt die Menüleiste mit den geforderten Einträgen."""
         menu_bar = QMenuBar(self)
         self.setMenuBar(menu_bar)
@@ -66,9 +66,9 @@ class MainWindow(QMainWindow):
         file_menu = menu_bar.addMenu("File")
 
         # Menü-Einträge hinzufügen
-        file_menu.addAction("Load", self.load_model)
-        file_menu.addAction("Save", self.save_model)
-        file_menu.addAction("ImportFdd", self.import_fdd)
+        file_menu.addAction("Load", self.load_model)                            # Funktion unten self. ... 
+        file_menu.addAction("Save", self.save_model)                            # Funktion unten
+        file_menu.addAction("ImportFdd", self.import_fdd)                       # Funktion unten
         file_menu.addSeparator()
         file_menu.addAction("Exit", self.close)
 
@@ -123,7 +123,7 @@ class MainWindow(QMainWindow):
             self.statusBar.showMessage("Modell wird angezeigt.")
 
 #*********************************************************************************************************
-    def change_model_color(self):
+    def change_model_color(self):                           #Hauptmethode, die aufgerufen wird, wenn der Benutzer die Farbe ändern möchte
         """Ändert die Farbe des geladenen Modells."""
         if not self.model:
             self.statusBar.showMessage("Kein Modell geladen. Farbe kann nicht geändert werden.")
@@ -137,13 +137,13 @@ class MainWindow(QMainWindow):
             rgb = [color.red() / 255.0, color.green() / 255.0, color.blue() / 255.0]
 
             # Alle Actors im Renderer finden und deren Farbe ändern
-            self.change_color_of_actors(rgb)
+            self.change_color_of_actors(rgb)      # Funktion übernimmt niedrigere Ebene der Arbeit: ändert Farbe dieser Actors mithilfe von RGB-Werte. 146
 
             # Neu rendern
             self.vtk_widget.GetRenderWindow().Render()
             self.statusBar.showMessage("Farbe des Modells geändert.")
 
-    def change_color_of_actors(self, rgb):
+    def change_color_of_actors(self, rgb):          # Funktion übernimmt niedrigere Ebene der Arbeit: ändert Farbe dieser Actors mithilfe von RGB-Werte
         """Ändert die Farbe aller Actors im Renderer."""
         # Durch alle ViewProps im Renderer iterieren
         for i in range(self.renderer.GetViewProps().GetNumberOfItems()):
@@ -191,7 +191,7 @@ class MainWindow(QMainWindow):
     def translate_model(self):
         """Verschiebe das Modell entlang der Achsen."""
         self.transform.Identity()  # Reset der Transformation
-        self.transform.Translate(300.0, 0.0, 0.0)  # Verschiebe entlang der X-Achse um 10 Einheiten
+        self.transform.Translate(30.0, 0.0, 0.0)  # Verschiebe entlang der X-Achse um 10 Einheiten
         self.apply_transform()
 
     def rotate_model(self):

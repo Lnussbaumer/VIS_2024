@@ -1,5 +1,5 @@
 from mbsObject import mbsObject
-
+# quader.obj
 from vtkmodules.vtkFiltersSources import (
     vtkLineSource,
     vtkArcSource,
